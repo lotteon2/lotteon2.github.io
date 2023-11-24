@@ -30,7 +30,7 @@ tags: kafka, msa, spring cloud
 
 spring cloud는 netflix에서 만든 eureka server를 사용해 구성할 수 있다. eureka server는 micro service 들이 eureka server에 등록하게되면 host, port, service url 등 micro service의 메타데이터를 전달한다. eureka server는 각 micro service들로부터 heartbeat를 지속적으로 받게되고 heartbeat를 받지 못하게 되면 eureka server 레지스트리에서 제거한다.
 
-![Screenshot 2023-11-20 at 11.49.18.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/03e99d81-9b67-4b13-a2f8-841f3ec28aa8)
+![Screenshot 2023-11-20 at 13.45.09.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/078fbb08-4d80-4a53-a2eb-4291ea3ff905)
 
 intellij에서 spring boot initializer를 사용해 프로젝트를 시작한다. 프로젝트 기본 정보를 입력한 후 Next를 누르면 위와 같은 화면이 나온다.
 
@@ -67,7 +67,7 @@ eureka:
 
 application.yml은 서비스가 실행될 때 필요한 변수들을 정의한 것이다. 포트와 application name, 실행 환경을 기본적으로 정의하고, eureka server는 자신을 레지스트리에 등록하지 않기 위해 client 하위 속성들을 false로 설정한다. (기본값은 true이다)
 
-![Screenshot 2023-11-20 at 12.17.52.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/01ab8629-f6b5-4dbe-8449-36c8470e19dc)
+![Screenshot 2023-11-20 at 13.50.09.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/36bc60ba-ff72-4b62-a136-167a28a81f42)
 
 discovery service를 실행 후 localhost:8761로 접속하면 위와 같은 화면을 확인할 수 있다. 중간에 `Instance currently registered with Eureka`에 다른 micro service의 정보들이 추가된다.
 
@@ -135,19 +135,19 @@ config service의 환경 설정 정보들이다. spring.cloud.config.server.git�
 
 management는 actuator에서 사용할 수 있는 메서드를 정의한다. application.yml은 실행 환경에 관계없이 적용할 값들을 정의한 것이다. application-local.yml에는 kafka와 eureka server에 대한 설정을 정의한다.
 
-![Screenshot 2023-11-20 at 12.44.46.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/e180b924-c215-4327-bdf1-9685e5d134bb)
+![Screenshot 2023-11-23 at 23.28.02.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/53a2194c-db77-4d9e-bbcb-8dfb8d1c74cc)
 
 discovery service와 config service를 실행하면 등록된 config service의 정보를 확인할 수 있다.
 
 ### Config repository
 
-![Screenshot 2023-11-20 at 13.45.09.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/078fbb08-4d80-4a53-a2eb-4291ea3ff905)
+![Screenshot 2023-11-20 at 11.49.18.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/03e99d81-9b67-4b13-a2f8-841f3ec28aa8)
 
 위 그림은 환경 설정 파일만 모아놓은 private 레포이다. 서비스별, 환경별로 파일을 생성해둔다. 필요한 변수들을 추가, 수정을 한 곳에서 할 수 있어 관리하기 편리하다.
 
 api key나 secret과 같은 민감한 정보들은 spring cloud config 의 encryption을 사용해 암호화된 형태로 저장하여 관리한다.
 
-![Screenshot 2023-11-20 at 13.50.09.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/36bc60ba-ff72-4b62-a136-167a28a81f42)
+![Screenshot 2023-11-20 at 12.17.52.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/01ab8629-f6b5-4dbe-8449-36c8470e19dc)
 
 ```bash
 POST http://localhost:8888/encrypt
@@ -189,7 +189,7 @@ services:
 
 spring cloud bus 는 분산 시스템에서 노드들의 메세지 브로커와 연결하여 변경된 환경 설정을 간편하게 적용시킬 수 있다. config service의 endpoint `/busrefresh`로 요청하게되면 config repository에서 변경된 사항이 각 MA에 적용된다. bus refresh는 각 서비스들을 재시작 하지 않아도 되는 장점이 있다.
 
-![Screenshot 2023-11-23 at 23.28.02.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/53a2194c-db77-4d9e-bbcb-8dfb8d1c74cc)
+![Screenshot 2023-11-20 at 12.44.46.png](https://github.com/nowgnas/nowgnas.github.io/assets/55802893/e180b924-c215-4327-bdf1-9685e5d134bb)
 
 bus refresh를 하게되면 위와 같이 Keys refreshed 배열에 config repository에서 변경된 사항을 확인할 수 있다.
 
