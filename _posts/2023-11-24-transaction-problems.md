@@ -2,8 +2,8 @@
 title: 2주차. 트랜잭션과 관련된 문제들에 대해
 description: 프로젝트를 진행하면서 자주 겪었던 트랜잭션과 관련된 문제들
 author: changhyo
-date: 2023-11-16 23:03 +0900
-lastmod: 2023-11-16 23:03 +0900
+date: 2023-11-23 14:00 +0900
+lastmod: 2023-11-23 14:00 +0900
 categories: techoTalk
 tags: transaction
 ---
