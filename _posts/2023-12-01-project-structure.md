@@ -5,7 +5,7 @@ author: changhyo
 date: 2023-11-30 18:03 +0900
 lastmod: 2023-11-30 18:03 +0900
 categories: techoTalk
-tags: "clean architecture"
+tags: clean architecture
 ---
 
 평소 프로젝트 구조를 어떻게 설계하는게 좋은지? 3-layered-architecture를 주로 사용하고 있는데 어떤 계층에 어떤 코드가 들어가는게 가장 좋은지에 대한 고민이 있었습니다. 
