@@ -38,13 +38,14 @@ handler는 Repository와 직접적으로 연관되어 있으면 상세한 구현
 
 ```java
 
-public void createHobbyHistory() {
-		Member member = memberReader.read();
-		Hobby hobby = hobbyReader.read();
+public Long createHobbyHistory() {
+    Member member = memberReader.read();
+    Hobby hobby = hobbyReader.read();
 		
-		HobbyHistory hobbyHistory = hobbyHistoryCreator.create();
-		alarmManager.push();
-		hobbyHistoryCreator.create();
+    HobbyHistory hobbyHistory = hobbyHistoryCreator.create(member,hobby);
+
+    alarmManager.push();
+    return hobbyHistory.getId();
 }
 ```
 
@@ -69,19 +70,15 @@ Spring Data JPA를 사용하면 Optional객체를 반환하기 때문에 값을 
 @Transactional
 @RequiredArgsConstructor
 public class myService() {
-		private final StoreRepository storeRepository;
+    private final StoreRepository storeRepository;
 		
-		public void method1(Long storeId) {
-				Store store = storeRepository.findById(storeId)
-																.orElseThrow(StoreAddressNotFoundException::new);
-				// store를 활용한 로직1
-		}
+    public void method1(Long storeId) {
+        Store store = storeRepository.findById(storeId).orElseThrow(StoreAddressNotFoundException::new);
+    }
 
-		public void method2(Long storeId) {
-				Store store = storeRepository.findById(storeId)
-																.orElseThrow(StoreAddressNotFoundException::new);
-				// store를 활용한 로직2
-		}
+    public void method2(Long storeId) {
+        Store store = storeRepository.findById(storeId).orElseThrow(StoreAddressNotFoundException::new);
+    }
 
 }
 ```
@@ -93,9 +90,8 @@ public class myService() {
 @Component
 @RequiredArgsConstructor
 public class StoreReader() {
-		public Store read(Long storeId) {
-        return storeRepository.findById(storeId)
-												.orElseThrow(StoreAddressNotFoundException::new);
+    public Store read(Long storeId) {
+        return storeRepository.findById(storeId).orElseThrow(StoreAddressNotFoundException::new);
     }
 }
 
@@ -104,17 +100,15 @@ public class StoreReader() {
 @Transactional
 @RequiredArgsConstructor
 public class myService() {
-		private final StoreReader storeReader;		
+    private final StoreReader storeReader;		
 		
-		public void method1(Long storeId) {
-				Store store = StoreReader.read(storeId);
-				// store를 활용한 로직1
-		}
+    public void method1(Long storeId) {
+        Store store = StoreReader.read(storeId);
+    }
 
-		public void method1(Long storeId) {
-				Store store = StoreReader.read(storeId);
-				// store를 활용한 로직2
-		}
+    public void method1(Long storeId) {
+        Store store = StoreReader.read(storeId);
+    }
 
 }
 ```
@@ -130,10 +124,10 @@ public class myService() {
 @Transactional
 @RequiredArgsConstructor
 public class myService() {
-		// 서비스의 여러 메서드에서 사용되는 Repo
-		private final StoreRepository storeRepository;
-		// 단 하나의 메서드에서만 사용되는 Repo, 하지만 주입받기 위해 반드시 선언해야 한다 
-		private final XXXRepository xxxRepository; 
+    // 서비스의 여러 메서드에서 사용되는 Repo
+    private final StoreRepository storeRepository;
+    // 단 하나의 메서드에서만 사용되는 Repo, 하지만 주입받기 위해 반드시 선언해야 한다 
+    private final XXXRepository xxxRepository; 
 }
 ```
 
@@ -144,13 +138,12 @@ handler계층에서 Repository를 주입받고, service는 handler계층을 주�
 @Component
 @RequiredArgsConstructor
 public class StoreReader() {
-		// 여러 Repo를 주입받는다
-		private final StoreRepository storeRepository;
-		private final XXXRepository xxxRepository; 
+    // 여러 Repo를 주입받는다
+    private final StoreRepository storeRepository;
+    private final XXXRepository xxxRepository; 
 
-		public Store read(Long storeId) {
-        return storeRepository.findById(storeId)
-												.orElseThrow(StoreAddressNotFoundException::new);
+    public Store read(Long storeId) {
+        return storeRepository.findById(storeId).orElseThrow(StoreAddressNotFoundException::new);
     }
 }
 
@@ -159,8 +152,8 @@ public class StoreReader() {
 @Transactional
 @RequiredArgsConstructor
 public class myService() {
-		// 여러 Repo를 주입받을 필요 없다
-		private final StoreReader storeReader;
+    // 여러 Repo를 주입받을 필요 없다
+    private final StoreReader storeReader;
 }
 ```
 
