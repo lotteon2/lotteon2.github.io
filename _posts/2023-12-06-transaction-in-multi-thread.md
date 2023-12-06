@@ -5,7 +5,7 @@ author: changhyo
 date: 2023-12-06 15:01 +0900
 lastmod: 2023-11-28 15:01 +0900
 categories: backend
-tags: multiThread, transaction, testCode
+tags: multiThread transaction testCode
 ---
 
 멀티쓰레드 환경의 테스트 코드를 작성하면서 알게된 내용을 공유하려고 합니다. 
