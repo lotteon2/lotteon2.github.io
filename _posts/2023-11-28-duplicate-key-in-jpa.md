@@ -5,7 +5,7 @@ author: changhyo
 date: 2023-11-28 18:03 +0900
 lastmod: 2023-11-28 18:03 +0900
 categories: backend
-tags: jpa, spring, compositeKey
+tags: jpa spring compositeKey
 ---
 # 복합키란
 복합키 정의를 살펴보면 다음과 같습니다
