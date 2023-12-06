@@ -1,6 +1,6 @@
 ---
 title: 3주차. 내 프로젝트 구조
-description: 설계와 아키텍처와 관련된 고민
+description: 설계와 아키텍처에 대한 고민
 author: changhyo
 date: 2023-11-30 18:03 +0900
 lastmod: 2023-11-30 18:03 +0900
