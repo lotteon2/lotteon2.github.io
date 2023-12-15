@@ -2,8 +2,8 @@
 title: 5주차. Resilience4j에 대해
 description: Resilience4j 개념 정리
 author: changhyo
-date: 2023-12-15 09:12 +0900
-lastmod: 2023-12-15 09:12 +0900
+date: 2023-12-15 09:12
+lastmod: 2023-12-15 09:12
 categories: techoTalk
 tags: resilience4j circuitbreaker
 ---
