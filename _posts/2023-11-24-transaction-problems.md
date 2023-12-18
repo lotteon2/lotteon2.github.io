@@ -21,13 +21,13 @@ tags: transaction
 ```java
 @Service
 public class MyService {
-		@Transactional
-		public void txMethod() {
-		}
+    @Transactional
+    public void txMethod() {
+    }
 
-		public void internalCall() {
-				MyService.txMethod();
-		}
+    public void internalCall() {
+        MyService.txMethod();
+    }
 
 }
 ```
@@ -41,14 +41,14 @@ public class MyService {
 
 ```java
 public class MyServiceProxy {
-		private final MyService myService;
+    private final MyService myService;
 
-		public void txMethod() {
-				// rollback false;
-				transaction.begin(); 
-				myService.txMethod();
-				transaction.end();
-		}
+    public void txMethod() {
+        // rollback false;
+        transaction.begin(); 
+        myService.txMethod();
+        transaction.end();
+    }
 
 }
 ```
@@ -84,24 +84,24 @@ class ProductServiceTest {
     
     @Test
     public void changeStatus() {
-				// 트랜잭션 open 
+        // 트랜잭션 open 
 
         // Product객체 생성
         Product product = Product.builder()
                 .cnt(5)
                 .build();
 
-				// Product객체 저장
+        // Product객체 저장
         productRepository.save(product);
         
-				// Product객체의 상태 변경 메서드 실행
+        // Product객체의 상태 변경 메서드 실행
         productService.changeProductCnt(product.getProductId(),100); // 더티체킹
 
-				// dirtyChecking으로 변경된 내용을 반영하기 위해 flush 강제 실행
-				em.flush();
+        // dirtyChecking으로 변경된 내용을 반영하기 위해 flush 강제 실행
+        em.flush();
         em.clear();
         
-				// 값을 변경한 객체 찾아오기
+        // 값을 변경한 객체 찾아오기
         Product changedProduct = productRepository.findById(product.getProductId()).get();
         
         // 값이 변경됐는지 검증
