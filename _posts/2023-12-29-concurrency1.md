@@ -5,7 +5,7 @@ author: changhyo
 date: 2023-12-29 09:12
 lastmod: 2024-01-07 11:07
 categories: techoTalk
-tags: lock concurrency coupon
+tags: lock concurrency multiThread coupon
 ---
 
 # 들어가기 앞서
