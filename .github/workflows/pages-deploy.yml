@@ -45,6 +45,9 @@ jobs:
           ruby-version: 3
           bundler-cache: true
 
+      - name: Update Bundler
+        run: /opt/hostedtoolcache/Ruby/3.3.0/x64/bin/bundle update --bundler
+
       - name: Install rake gem
         run: gem install rake
         
