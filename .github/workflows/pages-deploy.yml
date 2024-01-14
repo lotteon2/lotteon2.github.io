@@ -45,6 +45,9 @@ jobs:
           ruby-version: 3
           bundler-cache: true
 
+      - name: Install rake gem
+        run: gem install rake
+        
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
